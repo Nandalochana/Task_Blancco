@@ -1,9 +1,9 @@
 ﻿<?define name = "Parser-exe"?>
 <?define exe = "parser.exe"?>
 <?define path = ".\"?>
-<?define silentArgs = "/VERYSILENT /NORESTART /SUPPRESSMSGBOXES /MERGETASKS=!runcode"?>
+<?define silentArgs = ""?>
 <?define version = "0.0.0.1"?>
-<?define publisher = "letsdoautomation"?>
+<?define publisher = "blancco"?>
 <?define guid = "dd21c023-7949-46b6-b818-6b502946796a"?>
 
 <Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
