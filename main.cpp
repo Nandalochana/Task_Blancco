@@ -7,12 +7,13 @@
 */ 
 struct ResponseResult {
     char modelNumber[40]; // page 91 mention it as : Model number (40 ASCII characters)
-    char Ulra_DMA_supportModel;    // support model will return in here- page 101
-    bool smart_Self_TestSupported;  // is self test support or not  - page 94 input
+    char Ulra_DMA_supportModel;    // support model will return in here- page 88
+    bool smart_Self_TestSupported;  // is self test support or not  - page 93 input
 };
 
 /*
  Responislbe to handle request according to the file information
+ Note: The attached pdf is highliged, please verify before change the code 
 */
 ResponseResult commandRequest(const char* filename) {
     ResponseResult response;
