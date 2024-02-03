@@ -36,6 +36,13 @@ ResponseResult commandRequest(const char* filename) {
     file.read(&response.Ulra_DMA_supportModel, 1); 
    // Task 01 - find Highest ultra DMA values part - end
     
+   // Task 01 -  check self-test supported part - Start
+    file.seekg(82, std::ios::beg); // according to page 93 - it mentioned binary data should read line - 93, (check feature is enable or not)
+    char smartSupport;
+    file.read(&smartSupport, 1);
+    response.smart_Self_TestSupported = (smartSupport & (1 << 4)) != 0;
+
+   // Task 01 -  check self-test supported part - end
 
     file.close();
     return response;
@@ -57,8 +64,9 @@ int get_Highest_Model(char Ulra_DMA_supportModel){
     return highestSupportedMode; // According to data set it will return any value in every time, then I avoid to handle errors in here
 }
 
-
-
+/**
+ * Handle main function inhere 
+*/
 int main(int argc, char* argv[]) {
     // Check for the correct number of command line arguments
     if (argc != 2) {
@@ -71,7 +79,7 @@ int main(int argc, char* argv[]) {
     // Print the extracted information
     std::cout << "Model Number: " << response.modelNumber << std::endl;
     std::cout << "Highest Supported Ultra-DMA Mode: " << get_Highest_Model(response.Ulra_DMA_supportModel) << std::endl;
-
+    std::cout << "Is Self-Test Supported: " << (response.smart_Self_TestSupported ? "Yes" : "No") << std::endl;
     return EXIT_SUCCESS;
 }
 
