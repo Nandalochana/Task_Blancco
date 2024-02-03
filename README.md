@@ -19,3 +19,13 @@ Test_case - 01
  Test_case - 03
  g++ main.cpp -o parser
 ./parser Input_Task_01/identify3.bin
+
+-------------------------------
+
+---------Task - 02----------
+
+wix build Task_02.wxs 
+install -  msiexec /i Task_02.msi
+uninstall - msiexec /x Task_02.msi
+
+

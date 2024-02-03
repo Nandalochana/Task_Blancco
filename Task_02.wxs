@@ -1,0 +1,37 @@
+﻿<?define name = "Parser-exe"?>
+<?define exe = "parser.exe"?>
+<?define path = ".\"?>
+<?define silentArgs = "/VERYSILENT /NORESTART /SUPPRESSMSGBOXES /MERGETASKS=!runcode"?>
+<?define version = "0.0.0.1"?>
+<?define publisher = "letsdoautomation"?>
+<?define guid = "dd21c023-7949-46b6-b818-6b502946796a"?>
+
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+        <Package Name="$(var.name)" Manufacturer="$(var.publisher)" Version="$(var.version)"
+                UpgradeCode="$(var.guid)" Scope="perMachine">
+
+                <Media Id="1" Cabinet="setup.cab" EmbedCab="yes" />
+
+                <Feature Id="InstallFeature" Title="Install Feature">
+                        <ComponentRef Id="file" />
+                </Feature>
+
+                <CustomAction Id="run_exe" Return="asyncWait" Execute="commit"
+                        ExeCommand="$(var.silentArgs)" HideTarget="yes" Impersonate="no"
+                        FileRef="executable" />
+
+                <InstallExecuteSequence>
+                        <Custom Action="run_exe" After="InstallFiles"
+                                Condition="NOT Installed AND NOT REMOVE" />
+                </InstallExecuteSequence>
+
+                <StandardDirectory Id="TempFolder">
+                        <Directory Id="INSTALLLOCATION" Name="$(var.guid)">
+                                <Component Id="file" DiskId="1">
+                                        <File Id="executable" Name="$(var.exe)"
+                                                Source="$(var.path)\$(var.exe)" />
+                                </Component>
+                        </Directory>
+                </StandardDirectory>
+        </Package>
+        </Wix>
